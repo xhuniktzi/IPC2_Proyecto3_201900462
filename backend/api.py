@@ -139,42 +139,5 @@ def get_stats_by_error():
     return jsonify(admin.query_events_by_error_code(error))
 
 
-# @app.route('/json/date_and_reported_by', methods=['GET'])
-# def get_stats_by_date_and_reported_by():
-#     date = parse(request.args.get('date'))
-#     reported_by = request.args.get('reported_by')
-#     events = admin.filter_by_date_and_reported_by(date, reported_by)
-#     return jsonify(list(map(lambda e: serialize_event(e), events)))
-
-# @app.route('json/date_and_reported_by', methods=['GET'])
-# def get_stats_by_date_and_error():
-#     pass
-
-# @app.route('/stats', methods=['GET'])
-# def get_stats():
-#     print(admin.get_events_order_by_date())
-#     return Response(status=204)
-
-# @app.route('/stats/by_date', methods=['GET'])
-# def get_stats_by_date():
-#     date = request.args.get('date')
-#     events_by_date = admin.get_events_by_date(parse(date, dayfirst=True))
-#     print(events_by_date)
-#     return Response(status=204)
-
-# @app.route('/stats/reported_by', methods=['GET'])
-# def get_stats_by_reported_by():
-#     reported_by = request.args.get('reported_by')
-#     events_by_reported_by = admin.get_events_by_reported_by(reported_by)
-#     print(events_by_reported_by)
-#     return Response(status=204)
-
-# @app.route('/stats/error', methods=['GET'])
-# def get_stats_by_error():
-#     error = request.args.get('error')
-#     events_by_error = admin.get_events_by_error(int(error))
-#     print(events_by_error)
-#     return Response(status=204)
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
