@@ -89,8 +89,10 @@ class Admin:
         events: list = self.get_events_by_date(date)
 
         list_users: dict = {}
+        total: int = 0
 
         for event in events:
+            total = total + 1
             if not event.reported_by in list_users:
                 list_users[event.reported_by] = 1
             else:
@@ -98,18 +100,24 @@ class Admin:
                     event.reported_by] = list_users[event.reported_by] + 1
 
         list_return: list = []
+        return_info: dict = {}
 
         for user in list_users.keys():
             list_return.append({'user': user, 'cant': list_users[user]})
 
-        return list_return
+        return_info['data'] = list_return
+        return_info['total'] = total
+
+        return return_info
 
     def query_events_by_error_code(self, code: int):
         events: list = self.get_events_by_error(code)
 
         list_dates: dict = {}
+        total: int = 0
 
         for event in events:
+            total = total + 1
             if not event.date.strftime('%d/%m/%Y') in list_dates:
                 list_dates[event.date.strftime('%d/%m/%Y')] = 1
             else:
@@ -117,11 +125,15 @@ class Admin:
                     event.date.strftime('%d/%m/%Y')] + 1
 
         list_return: list = []
+        return_info: dict = {}
 
         for date in list_dates.keys():
             list_return.append({'date': date, 'cant': list_dates[date]})
 
-        return list_return
+        return_info['data'] = list_return
+        return_info['total'] = total
+
+        return return_info
 
     # def get_events_order_by_date(self):
     #     list_dates: list = []

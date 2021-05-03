@@ -118,7 +118,7 @@ def get_stats():
                 document.createTextNode(str(error['cant'])))
             error_element.appendChild(cant_element)
 
-    xml_output = document.toxml(encoding='utf-8')
+    xml_output = document.toprettyxml(indent='\t', newl='\n', encoding='utf-8')
     return Response(response=xml_output,
                     status=200,
                     mimetype='application/xml',
@@ -127,7 +127,7 @@ def get_stats():
 
 @app.route('/stats/by_date', methods=['GET'])
 def get_stats_by_date():
-    date = parse(request.args.get('date'))
+    date = parse(request.args.get('date'), dayfirst=True)
 
     return jsonify(admin.query_events_by_date(date))
 
