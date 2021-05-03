@@ -1,0 +1,40 @@
+{% extends 'base_layout.html' %} {% block content %}
+
+<div class="row">
+  <div class="col-6 p-3 border">
+    <h2 class="text-center">Por Fecha</h2>
+    <form id="by-date-form">
+      <label for="date" class="form-label">Fecha: </label>
+      <input
+        type="date"
+        name="date"
+        id="date"
+        class="form-control form-control-sm"
+      />
+      <div class="col-lg-2 d-grid gap-2 mx-auto p-3">
+        <input type="submit" value="Obtener" class="btn btn-sm btn-success" />
+      </div>
+    </form>
+    <div id="by-date-results"></div>
+  </div>
+  <div class="col-6 p-3 border">
+    <h2 class="text-center">Por codigo de error</h2>
+    <form id="by-error-form">
+      <label for="error" class="form-label">Codigo de error: </label>
+      <input
+        type="number"
+        name="error"
+        id="error"
+        class="form-control form-control-sm"
+      />
+      <div class="col-lg-2 d-grid gap-2 mx-auto p-3">
+        <input type="submit" value="Obtener" class="btn btn-sm btn-success" />
+      </div>
+    </form>
+    <div id="by-error-results"></div>
+  </div>
+</div>
+
+{% endblock content %} {% block script %} {{ block.super }} {% load static %}
+<script src="{% static 'reports.js' %}"></script>
+{% endblock script %}
