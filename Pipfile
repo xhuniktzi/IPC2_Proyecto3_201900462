@@ -8,6 +8,7 @@ django = "*"
 flask = "*"
 flask-cors = "*"
 python-dateutil = "*"
+requests = "*"
 
 [dev-packages]
 yapf = "*"
