@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-6 p-3 border">
     <h2 class="text-center">Por Fecha</h2>
-    <form id="by-date-form">
+    <form method="GET">
       <label for="date" class="form-label">Fecha: </label>
       <input
         type="date"
@@ -15,11 +15,27 @@
         <input type="submit" value="Obtener" class="btn btn-sm btn-success" />
       </div>
     </form>
-    <div id="by-date-results"></div>
+    <div id="by-date-results">
+      {% for result in date_results %}
+      <div>{{ result.user }} - {{ result.cant }}/{{ result.total }}</div>
+      <div class="progress" style="height: 1.5rem">
+        <div
+          class="progress-bar progress-bar-striped progress-bar-animated"
+          role="progressbar"
+          style="width: {{ result.percentage }}%;"
+          aria-valuenow="{{ result.percentage }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ result.percentage }}%
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
   <div class="col-6 p-3 border">
     <h2 class="text-center">Por codigo de error</h2>
-    <form id="by-error-form">
+    <form method="GET">
       <label for="error" class="form-label">Codigo de error: </label>
       <input
         type="number"
@@ -31,10 +47,26 @@
         <input type="submit" value="Obtener" class="btn btn-sm btn-success" />
       </div>
     </form>
-    <div id="by-error-results"></div>
+    <div id="by-error-results">
+      {% for result in error_results %}
+      <div>{{ result.date }} - {{ result.cant }}/{{ result.total }}</div>
+      <div class="progress" style="height: 1.5rem">
+        <div
+          class="progress-bar progress-bar-striped progress-bar-animated"
+          role="progressbar"
+          style="width: {{ result.percentage }}%;"
+          aria-valuenow="{{ result.percentage }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ result.percentage }}%
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
 {% endblock content %} {% block script %} {{ block.super }} {% load static %}
-<script src="{% static 'reports.js' %}"></script>
+<!-- <script src="{% static 'reports.js' %}"></script> -->
 {% endblock script %}
