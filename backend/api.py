@@ -17,36 +17,6 @@ cors = CORS(app, resources={r"/*": {"origin": "*"}})
 
 admin = Admin()
 
-# @app.route('/files/events', methods=['POST'])
-# def post_file_events():
-#     if not 'events_file' in request.files:
-#         abort(400)
-
-#     events_file = request.files['events_file']
-#     events_str = events_file.read().decode('utf-8')
-#     events_str = re.sub(r'<.+ (.+@.+)>', r'\1', events_str)
-#     events_str = re.sub(r'<(.+@.+)>', r'\1', events_str)
-
-#     root = ET.fromstring(events_str)
-
-#     for child in root:
-#         date = re.search(r'(\d{2,2}/\d{2,2}/\d{4,4})',
-#                          child.text).group(1).strip()
-#         reported_by = re.search(r'Reportado por:(.+)',
-#                                 child.text).group(1).strip()
-#         affected_users = re.search(r'Usuarios afectados:(.+)',
-#                                    child.text).group(1).strip()
-#         error_code = re.search(r'Error:.?(\d+)\d*',
-#                                child.text).group(1).strip()
-
-#         event = Event(parse(date, dayfirst=True), reported_by, int(error_code))
-#         for user in parse_list_users(affected_users):
-#             event.add_affected_user(user)
-
-#         admin.add_event(event)
-
-#     return Response(status=204)
-
 
 @app.route('/reset', methods=['PATCH'])
 def reset_state():
@@ -54,48 +24,12 @@ def reset_state():
     return Response(status=204)
 
 
-# @app.route('/events', methods=['GET'])
-# def get_events():
-#     if path.exists('file_request.xml'):
-#         file = open('file_request.xml', 'r+', encoding='utf-8')
-#         file_str = file.read().strip()
-#         file.close()
-#     else:
-#         file_str = ''
-
-#     return Response(response=file_str,
-#                     status=200,
-#                     mimetype='application/xml',
-#                     content_type='application/xml')
-
-
 @app.route('/events', methods=['POST'])
 def post_events():
     parse_request = request.data.decode('utf-8')
 
-    # file_request = open('file_request.xml', 'w+', encoding='utf-8')
-    # file_request.write(parse_request)
-    # file_request.close()
-
     parse_request = re.sub(r'<.+ (.+@.+)>', r'\1', parse_request)
     parse_request = re.sub(r'<(.+@.+)>', r'\1', parse_request)
-    # data = open('info_request.xml', 'w+', encoding='utf-8')
-    # data.write(info_request)
-    # data.close()
-
-    # parse_data = open('info_request.xml', 'r+', encoding='utf-8')
-    # parse_info = parse_data.read()
-    # parse_info = re.sub(r'<.+ (.+@.+)>', r'\1', parse_info)
-    # parse_info = re.sub(r'<(.+@.+)>', r'\1', parse_info)
-
-    # parse_request = open('parse_request.xml', 'w+', encoding='utf-8')
-    # parse_request.write(parse_info)
-    # parse_request.close()
-
-    # parse_data.close()
-
-    # tree = ET.parse('parse_request.xml')
-    # root = tree.getroot()
 
     root = ET.fromstring(parse_request)
 
@@ -202,6 +136,5 @@ def get_stats_by_error():
 
 
 if __name__ == '__main__':
-    # if path.exists('file_request.xml'):
-    #     remove('file_request.xml')
+
     app.run(host='0.0.0.0', port=5000, debug=True)

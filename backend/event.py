@@ -11,8 +11,3 @@ class Event:
 
     def add_affected_user(self, user: str):
         self.list_affected_users.append(user)
-
-    # def __repr__(self):
-    #     return '{' + '"date": "{}",\n"reported_by": "{}",\n"error_code": "{}"\n,"affected_users": {}'.format(
-    #         self.date.strftime('%d/%m/%Y'), self.reported_by, self.error_code,
-    #         self.list_affected_users) + '}'
