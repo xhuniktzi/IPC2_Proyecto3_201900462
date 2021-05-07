@@ -8,10 +8,10 @@ endpoint = 'http://localhost:5000'
 
 def index(request):
     if request.method == 'GET':
-        req_events = requests.get('http://localhost:5000/events')
+        # req_events = requests.get('http://localhost:5000/events')
         req_stats = requests.get('http://localhost:5000/stats')
         context = {
-            'input': req_events.text,
+            # 'input': req_events.text,
             'output': req_stats.text,
         }
         return render(request, 'index.html', context)

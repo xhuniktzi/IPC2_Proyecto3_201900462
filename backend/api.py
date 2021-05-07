@@ -73,9 +73,9 @@ def reset_state():
 def post_events():
     parse_request = request.data.decode('utf-8')
 
-    file_request = open('file_request.xml', 'w+', encoding='utf-8')
-    file_request.write(parse_request)
-    file_request.close()
+    # file_request = open('file_request.xml', 'w+', encoding='utf-8')
+    # file_request.write(parse_request)
+    # file_request.close()
 
     parse_request = re.sub(r'<.+ (.+@.+)>', r'\1', parse_request)
     parse_request = re.sub(r'<(.+@.+)>', r'\1', parse_request)
