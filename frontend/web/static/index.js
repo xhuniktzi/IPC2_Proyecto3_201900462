@@ -1,34 +1,22 @@
-/* eslint-disable require-jsdoc */
-const inputTextArea = document.getElementById('input');
-const outputTextArea = document.getElementById('output');
-const buttonSend = document.getElementById('send-button');
+const resetButton = document.getElementById('reset-button');
+const input = document.getElementById('input');
+const documentInput = document.getElementById('document');
 
-getStatsXML();
-
-buttonSend.addEventListener('click', (e) => {
-  const url = 'http://localhost:5000/events';
+resetButton.addEventListener('click', (e) => {
+  const url = 'http://localhost:5000/reset';
   fetch(url, {
-    method: 'POST',
-    body: inputTextArea.value,
+    method: 'PATCH',
   })
-      .then((res) => {
-        if (res.ok) {
-          getStatsXML();
-        }
-      });
+      .then(
+          location.reload(),
+      );
 });
 
-function getStatsXML() {
-  const url = 'http://localhost:5000/stats';
-  fetch(url, {
-    method: 'GET',
-  })
-      .then((res) => {
-        if (res.ok) {
-          return res.text();
-        }
-      })
-      .then((resText) => {
-        outputTextArea.value = resText;
-      });
-}
+documentInput.addEventListener('change', (e)=> {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.addEventListener('load', (e) => {
+    input.innerHTML = reader.result;
+  });
+});

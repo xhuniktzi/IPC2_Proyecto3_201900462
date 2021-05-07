@@ -9,9 +9,7 @@
         id="input"
         style="height: 55vh"
         readonly
-      >
-{{ input }}</textarea
-      >
+      ></textarea>
     </div>
   </div>
   <div class="col-6 p-3 border">
@@ -48,7 +46,9 @@
       <input type="submit" value="Enviar" class="btn btn-sm btn-primary" />
     </div>
     <div class="col-2 d-grid gap-2 mx-auto">
-      <input type="reset" value="Reiniciar" class="btn btn-sm btn-danger" />
+      <button id="reset-button" type="reset" class="btn btn-sm btn-danger">
+        Reiniciar
+      </button>
     </div>
   </form>
   <!-- <div class="col-lg-2 d-grid gap-2 mx-auto">
@@ -63,5 +63,5 @@
   </div> -->
 </div>
 {% endblock content %} {% block script %} {{ block.super }} {% load static %}
-<!-- <script src="{% static 'index.js' %}"></script> -->
+<script src="{% static 'index.js' %}"></script>
 {% endblock script %}
