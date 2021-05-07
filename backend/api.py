@@ -2,7 +2,7 @@ import re
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from io import StringIO
-from os import remove, path
+# from os import remove, path
 
 from flask import Flask, Response, request, jsonify, abort
 from flask_cors import CORS
@@ -48,19 +48,25 @@ admin = Admin()
 #     return Response(status=204)
 
 
-@app.route('/events', methods=['GET'])
-def get_events():
-    if path.exists('file_request.xml'):
-        file = open('file_request.xml', 'r+', encoding='utf-8')
-        file_str = file.read().strip()
-        file.close()
-    else:
-        file_str = ''
+@app.route('/reset', methods=['PATCH'])
+def reset_state():
+    admin.reset_state()
+    return Response(status=204)
 
-    return Response(response=file_str,
-                    status=200,
-                    mimetype='application/xml',
-                    content_type='application/xml')
+
+# @app.route('/events', methods=['GET'])
+# def get_events():
+#     if path.exists('file_request.xml'):
+#         file = open('file_request.xml', 'r+', encoding='utf-8')
+#         file_str = file.read().strip()
+#         file.close()
+#     else:
+#         file_str = ''
+
+#     return Response(response=file_str,
+#                     status=200,
+#                     mimetype='application/xml',
+#                     content_type='application/xml')
 
 
 @app.route('/events', methods=['POST'])
@@ -196,6 +202,6 @@ def get_stats_by_error():
 
 
 if __name__ == '__main__':
-    if path.exists('file_request.xml'):
-        remove('file_request.xml')
+    # if path.exists('file_request.xml'):
+    #     remove('file_request.xml')
     app.run(host='0.0.0.0', port=5000, debug=True)

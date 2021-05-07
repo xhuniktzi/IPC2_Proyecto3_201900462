@@ -6,6 +6,9 @@ class Admin:
     def __init__(self):
         self.list_events: list = []
 
+    def reset_state(self):
+        self.list_events.clear()
+
     def add_event(self, event: Event):
         self.list_events.append(event)
 
