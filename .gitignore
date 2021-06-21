@@ -131,3 +131,5 @@ dmypy.json
 *.xml
 node_modules/
 *.output.jsonc
+
+.vscode/
